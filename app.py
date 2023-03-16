@@ -1,6 +1,7 @@
 # 1. Import required libraries
 from flask import Flask, render_template, request
 import os
+from asset_utils import asset_to_hostname
 
 # 2. Initialize Flask app
 app = Flask(__name__)
@@ -24,8 +25,11 @@ def get_snow_info(hostname, os_type):
 def index():
     if request.method == 'POST':
         # Get user inputs from the form
-        hostname = request.form['hostname']
+        asset_number = request.form['asset_number']
         os_type = request.form['os_type']
+        
+        # Convert asset number to hostname
+        hostname = asset_to_hostname(asset_number)
         
         # Call get_snow_info function to retrieve the hostname and IP address
         hostname, ip_address = get_snow_info(hostname, os_type)
