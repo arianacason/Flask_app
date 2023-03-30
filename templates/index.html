@@ -5,26 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Server Information</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
 </head>
 <body>
-    <h1>Enter server information</h1>
-    <form action="/" method="post">
-        <label for="asset_number">Asset Number:</label>
-        <input type="text" id="asset_number" name="asset_number" required><br><br>
-        <label for="os_type">Operating System:</label>
-        <select id="os_type" name="os_type" required>
-            <option value="">--Please choose an option--</option>
-            <option value="Windows Server">Windows Server 11</option>
-            <option value="Windows Server">Windows Server 10</option>
-            <option value="RHEL">RHEL 6.9</option>
-            <option value="RHEL">RHEL 7.4</option>
-            <option value="RHEL">RHEL 8.7</option>
-            <option value="RHEL">RHEL 9.1</option>
-            <option value="Solaris">Solaris</option>
-            <!-- Add more operating system options as needed -->
-        </select>
-        <br><br>
-        <input type="submit" value="Submit">
-    </form>
+    <div class="container">
+        <h1 class="my-4">Enter server information</h1>
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        <form action="/" method="post">
+            <div class="form-group">
+                <label for="asset_number">Asset Number:</label>
+                <input type="text" class="form-control" id="asset_number" name="asset_number" required>
+            </div>
+            <div class="form-group">
+                <label for="os_type">Operating System:</label>
+                <select class="form-control" id="os_type" name="os_type" required>
+                    <option value="">--Please choose an option--</option>
+                    <option value="Windows Server">Windows Server 11</option>
+                    <option value="Windows Server">Windows Server 10</option>
+                    <option value="RHEL">RHEL 6.9</option>
+                    <option value="RHEL">RHEL 7.4</option>
+                    <option value="RHEL">RHEL 8.7</option>
+                    <option value="RHEL">RHEL 9.1</option>
+                    <option value="Solaris">Solaris</option>
+                    <!-- Add more operating system options as needed -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="root_password">Root Password:</label>
+                <input type="password" class="form-control" id="root_password" name="root_password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-secondary" onclick="location.reload()">Refresh Installation</button>
+        </form>
+    </div>
 </body>
 </html>
